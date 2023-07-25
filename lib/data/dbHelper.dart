@@ -4,7 +4,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_demo/models/product.dart';
 
-abstract class DbHelper {
+ class DbHelper {
   late Database _db;
   Future<Database> get db async {
     if (_db == null) {
