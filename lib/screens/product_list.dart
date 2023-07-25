@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite_demo/data/dbHelper.dart';
 import 'package:sqflite_demo/models/product.dart';
+import 'package:sqflite_demo/screens/product_add.dart';
 
 class ProductList extends StatefulWidget{
   @override
@@ -16,12 +17,7 @@ class _ProductListState extends State {
   
   @override
   void initState() {
-   var productsFuture= dbHelper.getProducts();
-   productsFuture.then((data){
-     this.products=data;
-
-   });
-
+  getProducts();
   }
   
   @override
@@ -31,6 +27,11 @@ class _ProductListState extends State {
         title: Text("Ürün Listesi"),
       ),
       body: buildProductList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){goToProductAdd();},
+        child: Icon(Icons.add),
+        tooltip: "Yeni ürün ekle",
+      ),
     );
   }
 
@@ -52,5 +53,23 @@ return ListView.builder(
      );
     });
  }
+
+  void goToProductAdd() async {
+   bool result = await Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductAdd()));
+   if(result!= null){
+     if(result){
+       getProducts();
+
+     }
+   }
+  }
+  void getProducts() async{
+    var productsFuture= dbHelper.getProducts();
+    productsFuture.then((data){
+      this.products=data;
+      productCaunt=data.length;
+
+    });
+  }
 }
 

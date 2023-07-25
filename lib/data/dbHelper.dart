@@ -32,7 +32,7 @@ import 'package:sqflite_demo/models/product.dart';
     });
   }
 
-  Future<int> insert(Product product) async {
+  Future<int> insert(Product product, {required String description}) async {
     Database db = await this.db;
 
     var result = await db.insert("products",product.toMap());
