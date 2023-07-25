@@ -67,8 +67,7 @@ class ProductAddState extends State {
   }
 
   void addProduct() async {
-  var result= await dbHelper.insert(Product(txtName.text, txtDescription.text,
-      txtUnitPriceField.text as double), description: '');
+  var result= await dbHelper.insert(Product(txtName.text, txtDescription.text,txtUnitPriceField.text as double), description: '');
 Navigator.pop(context,true);
   }
 
